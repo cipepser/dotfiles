@@ -33,4 +33,4 @@ export PATH=$(stack path --local-bin):$PATH
 
 # Application
 export PATH=$PATH:/Applications
-
+export PATH=$PATH:$HOME/.docker/bin
