@@ -1,7 +1,6 @@
 #!/usr/bin/env bun
 
 import { $ } from "bun";
-
 interface StatusInput {
   model: {
     id: string;
@@ -25,6 +24,16 @@ interface StatusInput {
     project_dir: string;
   };
   cwd: string;
+  rate_limits: {
+    five_hour: {
+      used_percentage: number;
+      resets_at: number;
+    };
+    seven_day: {
+      used_percentage: number;
+      resets_at: number;
+    };
+  };
 }
 
 const COLORS = {
