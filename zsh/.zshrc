@@ -51,3 +51,9 @@ export CLICOLOR=1
 # SPROMPT="${COLOR_RED}correct?: %R -> %r [n,y,a,e]:${COLOR_RESET}"
 
 eval "$(direnv hook zsh)"
+# bun completions
+[ -s "/Users/cipepser/.bun/_bun" ] && source "/Users/cipepser/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
