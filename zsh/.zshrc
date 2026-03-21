@@ -1,4 +1,8 @@
-export ZPLUG_HOME=/opt/homebrew/opt/zplug
+if [[ $USER == "cipepser" ]]; then
+	export ZPLUG_HOME=$HOME/.zplug
+else
+	export ZPLUG_HOME=/opt/homebrew/opt/zplug
+fi
 source $ZPLUG_HOME/init.zsh
 
 #-----------------------------------------------------
@@ -10,9 +14,8 @@ export CONFIG=$HOME/Documents/config
 source $CONFIG/zsh/env.zsh
 source $CONFIG/zsh/alias.zsh
 source $CONFIG/zsh/zplug.zsh
-# source $CONFIG/zsh/prezto.zsh
-source $CONFIG/zsh/env.zsh
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $CONFIG/zsh/prezto.zsh
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 #-----------------------------------------------------
 # general configuration for zsh
