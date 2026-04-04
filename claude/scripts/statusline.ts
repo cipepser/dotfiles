@@ -1,6 +1,7 @@
 #!/usr/bin/env bun
 
 import { $ } from "bun";
+
 interface StatusInput {
   model: {
     id: string;
@@ -45,6 +46,35 @@ function colorize(text: string, color: keyof typeof COLORS): string {
   return `${COLORS[color]}${text}${COLORS.reset}`;
 }
 
+async function getGitRepoRoot(cwd: string): Promise<string | null> {
+  try {
+    const result = await $`git -C ${cwd} rev-parse --show-toplevel`.quiet();
+    return result.text().trim();
+  } catch {
+    return null;
+  }
+}
+
+async function formatPath(cwd: string): Promise<string | null> {
+  const home = process.env.HOME ?? "";
+  const gitRoot = await getGitRepoRoot(cwd);
+
+  if (gitRoot) {
+    if (cwd === gitRoot) {
+      return null;
+    }
+    const relativePath = cwd.slice(gitRoot.length + 1);
+    return `./${relativePath}`;
+  }
+
+  // git リポジトリでない場合: HOME からの相対パス or 絶対パス
+  if (cwd.startsWith(home)) {
+    return `~${cwd.slice(home.length)}`;
+  }
+
+  return cwd;
+}
+
 function formatContextUsage(input: StatusInput): string {
   const { context_window } = input;
   const usage = context_window.current_usage;
@@ -69,14 +99,37 @@ function formatCost(input: StatusInput): string {
   return `$${cost.toFixed(4)}`;
 }
 
+function formatJstTime(unixSeconds: number): string {
+  const date = new Date(unixSeconds * 1000);
+  return new Intl.DateTimeFormat("ja-JP", {
+    timeZone: "Asia/Tokyo",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(date);
+}
+
 async function main() {
   const inputText = await Bun.stdin.text();
+
   const input: StatusInput = JSON.parse(inputText);
 
+  const path = await formatPath(input.cwd);
+
   const parts = [
+    path ? colorize(path, "gray") : null,
     colorize(input.model.id, "gray"),
     colorize(formatContextUsage(input), "gray"),
     colorize(formatCost(input), "gray"),
+    colorize(
+      `5h ${input.rate_limits.five_hour.used_percentage}% ${formatJstTime(input.rate_limits.five_hour.resets_at)}`,
+      "gray",
+    ),
+    colorize(
+      `7d ${input.rate_limits.seven_day.used_percentage}% ${formatJstTime(input.rate_limits.seven_day.resets_at)}`,
+      "gray",
+    ),
     colorize(`v${input.version}`, "gray"),
   ].filter(Boolean);
 
