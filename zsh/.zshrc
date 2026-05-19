@@ -12,10 +12,11 @@ source $ZPLUG_HOME/init.zsh
 export CONFIG=$HOME/Documents/config
 
 source $CONFIG/zsh/env.zsh
+source $CONFIG/zsh/nix.zsh
 source $CONFIG/zsh/alias.zsh
 source $CONFIG/zsh/zplug.zsh
 source $CONFIG/zsh/prezto.zsh
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOME/.nix-profile/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 #-----------------------------------------------------
 # general configuration for zsh
@@ -23,12 +24,9 @@ source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 ## Completion configuration
-if type brew &>/dev/null; then
-	FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-
-	autoload -Uz compinit
-	compinit
-fi
+FPATH=$HOME/.nix-profile/share/zsh/site-functions:$FPATH
+autoload -Uz compinit
+compinit
 
 ## color for ls command
 export CLICOLOR=1

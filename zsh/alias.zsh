@@ -53,9 +53,8 @@ hash -d samp=$SAND/mysamples
 alias idea='open -a "`ls -dt /Applications/IntelliJ\ IDEA*|head -1`"'
 alias goland='open -a "`ls -dt /Applications/Goland.app|head -1`"'
 
-# exa
-alias exa='exa -lha --git'
-alias la='exa'
+# eza (exa後継)
+alias la='eza -lha --git'
 
 # isucon
 alias ns='notify_slack -snippet'
