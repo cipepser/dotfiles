@@ -54,6 +54,3 @@ eval "$(direnv hook zsh)"
 # bun completions
 [ -s "/Users/cipepser/.bun/_bun" ] && source "/Users/cipepser/.bun/_bun"
 
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"

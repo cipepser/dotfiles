@@ -34,3 +34,16 @@ export PATH=$(stack path --local-bin):$PATH
 # Application
 export PATH=$PATH:/Applications
 export PATH=$PATH:$HOME/.docker/bin
+
+# claude
+export PATH=$PATH:$HOME/.claude/local
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+export PATH="$HOME/.rd/bin:$PATH"
+
+eval "$(mise activate zsh)"
+
+export LLM_OPS_USE_NIX=1
