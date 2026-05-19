@@ -1,10 +1,3 @@
-if [[ $USER == "cipepser" ]]; then
-	export ZPLUG_HOME=$HOME/.zplug
-else
-	export ZPLUG_HOME=/opt/homebrew/opt/zplug
-fi
-source $ZPLUG_HOME/init.zsh
-
 #-----------------------------------------------------
 # import external config files
 #-----------------------------------------------------
@@ -14,7 +7,7 @@ export CONFIG=$HOME/Documents/config
 source $CONFIG/zsh/env.zsh
 source $CONFIG/zsh/nix.zsh
 source $CONFIG/zsh/alias.zsh
-source $CONFIG/zsh/zplug.zsh
+source $CONFIG/zsh/plugins.zsh
 source $CONFIG/zsh/prezto.zsh
 source $HOME/.nix-profile/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
@@ -24,7 +17,7 @@ source $HOME/.nix-profile/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 ## Completion configuration
-FPATH=$HOME/.nix-profile/share/zsh/site-functions:$FPATH
+# FPATH の追加は nix.zsh で行っている (compinit/promptinit の前である必要があるため)。
 autoload -Uz compinit
 compinit
 
@@ -51,4 +44,7 @@ export CLICOLOR=1
 eval "$(direnv hook zsh)"
 # bun completions
 [ -s "/Users/cipepser/.bun/_bun" ] && source "/Users/cipepser/.bun/_bun"
+
+# zsh-syntax-highlighting は他の widgets 定義の後に source する (推奨)
+source $HOME/.nix-profile/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 

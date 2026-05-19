@@ -61,5 +61,7 @@
     # zsh プラグイン (.zshrc から手動 source している)
     zsh-autosuggestions
     zsh-completions
+    zsh-syntax-highlighting
+    pure-prompt
   ];
 }

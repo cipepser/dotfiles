@@ -4,3 +4,9 @@
 if [ -d "$HOME/.nix-profile/bin" ]; then
   export PATH="$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:$PATH"
 fi
+
+# zsh-completions / pure prompt の関数を autoload できるよう FPATH を通す。
+# compinit や promptinit より前に通す必要があるため nix.zsh で設定する。
+if [ -d "$HOME/.nix-profile/share/zsh/site-functions" ]; then
+  FPATH="$HOME/.nix-profile/share/zsh/site-functions:$FPATH"
+fi

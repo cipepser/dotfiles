@@ -1,32 +1,10 @@
 #--------------------------------------
-# plugins
+# Prompt (pure prompt from nixpkgs)
 #--------------------------------------
-
-# Source of zplug
-source ~/.zplug/init.zsh
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-
-zplug "mafredri/zsh-async"
-zplug "sindresorhus/pure"
-
-# 構文のハイライト(https://github.com/zsh-users/zsh-syntax-highlighting)
-zplug "zsh-users/zsh-syntax-highlighting"
-
-# 補完
-zplug "zsh-users/zsh-autosuggestions"
-# ~/.zplug/repos/zsh-users/zsh-autosuggestions/zsh-autosuggestions.zshに以下を設定する
-# ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
-
-zplug "zsh-users/zsh-completions"
-# zplug "chrissicool/zsh-256color"
-
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-  printf "Install? [y/N]: "
-  if read -q; then
-    echo; zplug install
-  fi
-fi
+# pure prompt は ~/.nix-profile/share/zsh/site-functions/ にあり、
+# FPATH 経由で autoload される (.zshrc で site-functions を FPATH に追加済み)。
+autoload -U promptinit && promptinit
+prompt pure
 
 #--------------------------------------
 # Command history configuration
@@ -78,8 +56,3 @@ function select_ghq_cd() {
 }
 zle -N select_ghq_cd
 bindkey '^g' select_ghq_cd
-
-
-# Then, source plugins and add commands to $PATH
-# zplug load --verbose
-zplug load
