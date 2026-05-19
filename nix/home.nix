@@ -51,6 +51,13 @@
     ruff
     uv
 
+    # 開発系の追加移行 (brew からの引っ越し)
+    universal-ctags # brew の ctags の後継 (exuberant-ctags 互換)
+    iproute2mac
+    aespipe
+    pdftoipe
+    azure-cli
+
     # zsh プラグイン (.zshrc から手動 source している)
     zsh-autosuggestions
     zsh-completions
