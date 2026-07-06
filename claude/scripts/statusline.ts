@@ -123,11 +123,11 @@ async function main() {
     colorize(formatContextUsage(input), "gray"),
     colorize(formatCost(input), "gray"),
     colorize(
-      `5h ${input.rate_limits.five_hour.used_percentage}% ${formatJstTime(input.rate_limits.five_hour.resets_at)}`,
+      `5h ${input.rate_limits.five_hour.used_percentage.toFixed(1)}% ${formatJstTime(input.rate_limits.five_hour.resets_at)}`,
       "gray",
     ),
     colorize(
-      `7d ${input.rate_limits.seven_day.used_percentage}% ${formatJstTime(input.rate_limits.seven_day.resets_at)}`,
+      `7d ${input.rate_limits.seven_day.used_percentage.toFixed(1)}% ${formatJstTime(input.rate_limits.seven_day.resets_at)}`,
       "gray",
     ),
     colorize(`v${input.version}`, "gray"),
