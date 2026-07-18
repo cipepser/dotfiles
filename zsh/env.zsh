@@ -9,11 +9,8 @@ export GO111MODULE="on"
 # rust
 export PATH=$PATH:$HOME/.cargo/bin
 
-# python
-export PATH=$PATH:/usr/local/opt/python/libexec/bin
-export PYENV_ROOT=${HOME}/.pyenv
-eval "$(pyenv init -)"
-# eval "$(pyenv virtualenv-init -)"
+# python は mise で管理 (`mise use --global python@3.12.0 python@3.11.6`)
+# pyenv は 2026-05 に撤去済み
 
 # geth
 export PATH=$PATH:$HOME/Documents/sand/geth

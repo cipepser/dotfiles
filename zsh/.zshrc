@@ -43,8 +43,12 @@ export CLICOLOR=1
 
 eval "$(direnv hook zsh)"
 # bun completions
-[ -s "/Users/cipepser/.bun/_bun" ] && source "/Users/cipepser/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # zsh-syntax-highlighting は他の widgets 定義の後に source する (推奨)
 source $HOME/.nix-profile/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="$HOME/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
