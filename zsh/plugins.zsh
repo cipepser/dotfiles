@@ -17,7 +17,7 @@ setopt hist_ignore_space # ignore when commands starts with space
 setopt share_history     # share command history data
 
 function peco_select_history() {
-  BUFFER=`history -n 1 | tail -r  | awk '!a[$0]++' | peco`
+  BUFFER=`history -rn 1 | awk '!a[$0]++' | peco`
   CURSOR=$#BUFFER
   zle reset-prompt
 }
