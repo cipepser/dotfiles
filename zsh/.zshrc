@@ -19,7 +19,9 @@ source $CONFIG/zsh/nix.zsh
 source $CONFIG/zsh/alias.zsh
 source $CONFIG/zsh/plugins.zsh
 source $CONFIG/zsh/prezto.zsh
-source $HOME/.nix-profile/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# nix (home-manager) 未適用の状態でもこけないよう存在チェックする
+[ -f $HOME/.nix-profile/share/zsh-autosuggestions/zsh-autosuggestions.zsh ] \
+  && source $HOME/.nix-profile/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 #-----------------------------------------------------
 # general configuration for zsh
@@ -56,7 +58,8 @@ eval "$(direnv hook zsh)"
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # zsh-syntax-highlighting は他の widgets 定義の後に source する (推奨)
-source $HOME/.nix-profile/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[ -f $HOME/.nix-profile/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] \
+  && source $HOME/.nix-profile/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)

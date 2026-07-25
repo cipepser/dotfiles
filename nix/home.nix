@@ -1,9 +1,8 @@
 { pkgs, ... }:
 
+# 全ホスト共通の設定。username / homeDirectory やホスト固有パッケージは
+# hosts/ 配下のモジュールで設定する。
 {
-  home.username = "masanori.onda";
-  home.homeDirectory = "/Users/masanori.onda";
-
   # 初回設定時の home-manager のバージョン。基本は変えない。
   home.stateVersion = "25.05";
 
@@ -46,17 +45,10 @@
     graphviz
     imagemagick
     ffmpeg
-    biome
-    dbmate
     ruff
     uv
-
-    # 開発系の追加移行 (brew からの引っ越し)
     universal-ctags # brew の ctags の後継 (exuberant-ctags 互換)
-    iproute2mac
     aespipe
-    pdftoipe
-    azure-cli
 
     # zsh プラグイン (.zshrc から手動 source している)
     zsh-autosuggestions

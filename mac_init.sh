@@ -18,9 +18,12 @@ cd $HOME/Documents
 git clone https://github.com/cipepser/config.git
 
 # zsh
-brew install zsh zsh-autosuggestions zsh-completions zsh-syntax-highlighting colordiff reattach-to-user-namespace tmux
-which zsh | xargs chsh -s
-chmod 755 /opt/homebrew/share
+# zsh 本体は OS 付属の /bin/zsh (universal) を使う。
+# brew の zsh を chsh すると、それが x86_64 専用ビルドだった場合に
+# ログインシェル以降が丸ごと Rosetta 2 に落ちるため入れない。
+# zsh-autosuggestions / zsh-completions / zsh-syntax-highlighting は nix 管理 (nix/home.nix)。
+chsh -s /bin/zsh
+brew install colordiff reattach-to-user-namespace tmux
 
 ## zplug プラグイン管理のため
 cd $HOME
@@ -34,8 +37,6 @@ setopt EXTENDED_GLOB
 ## 移動したディレクトリを覚えておくため
 git clone https://github.com/rupa/z.git ~/.zsh.d
 
-# /etc/shellsの末尾に`/usr/local/bin/zsh`を追記
-chsh -s /usr/local/bin/zsh
 exec $SHELL -l
 
 # git

@@ -1,5 +1,5 @@
 {
-  description = "masanori.onda's home-manager configuration";
+  description = "cipepser's home-manager configurations";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -11,12 +11,27 @@
 
   outputs = { nixpkgs, home-manager, ... }:
     let
-      system = "aarch64-darwin";
-      pkgs = import nixpkgs { inherit system; };
-    in {
-      homeConfigurations."masanori.onda" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [ ./home.nix ];
+      # ホストごとの差分はここと hosts/ 配下だけで管理する。
+      # username を key にしているので `home-manager switch --flake .#<username>` で切り替わる。
+      hosts = {
+        # 仕事用 Mac (Apple Silicon)
+        "masanori.onda" = {
+          system = "aarch64-darwin";
+          module = ./hosts/work.nix;
+        };
+        # 個人用 Mac (Apple Silicon / M2)
+        "cipepser" = {
+          system = "aarch64-darwin";
+          module = ./hosts/personal.nix;
+        };
       };
+
+      mkHome = _username: { system, module }:
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs { inherit system; };
+          modules = [ ./home.nix module ];
+        };
+    in {
+      homeConfigurations = builtins.mapAttrs mkHome hosts;
     };
 }
