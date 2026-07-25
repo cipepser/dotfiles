@@ -11,6 +11,5 @@
     dbmate
     azure-cli
     pdftoipe
-    iproute2mac
   ];
 }

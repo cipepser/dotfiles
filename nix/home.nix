@@ -40,7 +40,6 @@
 
     # 開発系
     direnv # .zshrc の `eval "$(direnv hook zsh)"` 経由で hook
-    tmux
     pandoc
     graphviz
     imagemagick

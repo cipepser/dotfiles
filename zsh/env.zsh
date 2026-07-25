@@ -7,6 +7,8 @@ export PATH=$PATH:$GOPATH/bin
 export GO111MODULE="on"
 
 # rust
+# 2026-07 に rustup ごと撤去済み。使うときは mac_init.sh の手順で入れ直す
+# (ディレクトリが無くても PATH に入れて害はないので設定は残しておく)
 export PATH=$PATH:$HOME/.cargo/bin
 
 # python は mise で管理 (`mise use --global python@3.12.0 python@3.11.6`)

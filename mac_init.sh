@@ -23,11 +23,6 @@ git clone https://github.com/cipepser/config.git
 # ログインシェル以降が丸ごと Rosetta 2 に落ちるため入れない。
 # zsh-autosuggestions / zsh-completions / zsh-syntax-highlighting は nix 管理 (nix/home.nix)。
 chsh -s /bin/zsh
-brew install colordiff reattach-to-user-namespace tmux
-
-## zplug プラグイン管理のため
-cd $HOME
-git clone https://github.com/zplug/zplug.git .zplug
 
 ## zprezto
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
@@ -44,31 +39,13 @@ rm ~/.gitconfig
 ln -s $CONFIG/git/.gitconfig ~/.gitconfig
 
 # brew
-brew install ghq
-brew install peco
+# 以下は nix (nix/home.nix) に移行済みなので brew では入れない:
+#   ghq peco hub jq ripgrep direnv tree gibo graphviz moreutils fd bat tokei
+#   aespipe ctags(→universal-ctags) exa(→eza) ffmpeg pandoc uv wget colordiff
+#   difftastic gh libmagic(→file) zsh-autosuggestions zsh-completions zsh-syntax-highlighting
+# セットアップ手順は README の「nix (home-manager)」を参照。
 brew install nodejs
-brew install hub
-brew install jq
 brew install go
-brew install ripgrep
-brew install direnv
-brew install zplug
-brew install tree
-brew install gibo
-brew install graphviz
-brew install moreutils
-brew install iproute2mac
-brew install fd
-brew install exa
-brew install bat
-brew install tokei
-brew install pyenv
-brew install aespipe
-brew install python
-
-# ctags
-brew install ctags
-alias ctags="`brew --prefix`/bin/ctags"
 
 # zsh
 rm $HOME/.zshrc
@@ -110,16 +87,9 @@ curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python3 get-pip.py
 rm get-pip.py
 
-# dbt
-mkdir $HOME/.dbt
-touch $HOME/.dbt/touch/profiles.yml
-pip3 install dbt-bigquery
-brew tap dbt-labs/dbt
-brew install dbt-postgres
-brew link --overwrite dbt-postgres
+# gcloud
 brew install --cask google-cloud-sdk
 source $CONFIG/zsh/env.zsh
 
 gcloud auth application-default login --scopes=https://www.googleapis.com/auth/bigquery,https://www.googleapis.com/auth/drive.readonly,https://www.googleapis.com/auth/iam.test
-python3 -m pip install dbt-bigquery dbt-rpc
 
