@@ -1,7 +1,7 @@
 {
   "env": {
-    "DISABLE_INSTALLATION_CHECKS": "1",
     "CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR": "1",
+    "DISABLE_INSTALLATION_CHECKS": "1",
     "MAX_THINKING_TOKENS": "31999",
     "USE_BUILTIN_RIPGREP": "1"
   },
@@ -121,18 +121,39 @@
     ],
     "defaultMode": "acceptEdits"
   },
-  "hooks": {},
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '~/.claude/hooks/herdr-agent-state.sh' session",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
   "statusLine": {
     "type": "command",
     "command": "bun run ~/.claude/scripts/statusline.ts"
   },
   "enabledPlugins": {
-    "context7@claude-plugins-official": true,
-    "code-review@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": true,
     "claude-code-setup@claude-plugins-official": true,
     "claude-md-management@claude-plugins-official": true,
-    "mcp-tools@izumin5210-dotfiles": true
+    "code-review@claude-plugins-official": true,
+    "context7@claude-plugins-official": true
   },
-  "language": "japanese"
+  "extraKnownMarketplaces": {
+    "last30days-skill": {
+      "source": {
+        "source": "github",
+        "repo": "mvanhorn/last30days-skill"
+      }
+    }
+  },
+  "language": "japanese",
+  "tui": "fullscreen",
+  "model": "opus"
 }
