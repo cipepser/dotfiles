@@ -15,7 +15,9 @@ git config --global color.ui auto
 git config --global alias.co checkout
 
 cd $HOME/Documents
-git clone https://github.com/cipepser/config.git
+# repo名は dotfiles だが、$CONFIG（zsh/.zshrc）が $HOME/Documents/config を指すので
+# clone 先のディレクトリ名は config に固定する
+git clone https://github.com/cipepser/dotfiles.git config
 
 # zsh
 # zsh 本体は OS 付属の /bin/zsh (universal) を使う。
@@ -70,6 +72,15 @@ cargo install cargo-udeps --locked
 # karabiner
 ln -s $CONFIG/karabiner/ctrl-kana-to-esc.json $HOME/.config/karabiner/assets/complex_modifications/ctrl-kana-to-esc.json
 ln -s $CONFIG/karabiner/ctrl-m-to-enter.json $HOME/.config/karabiner/assets/complex_modifications/ctrl-m-to-enter.json
+
+# claude code
+# 設定・statusline・フックは config repo を SSoT にして symlink で参照する。
+# 注意: symlink 先へ書き込むツール（jq > tmp && mv tmp file など）は
+# symlink 自体を置き換えて壊すので、書き換えは `cat tmp > file` 側で行う。
+mkdir -p ~/.claude/scripts ~/.claude/hooks
+ln -s $CONFIG/claude/settings.json ~/.claude/settings.json
+ln -s $CONFIG/claude/scripts/statusline.ts ~/.claude/scripts/statusline.ts
+ln -s $CONFIG/claude/hooks/herdr-agent-state.sh ~/.claude/hooks/herdr-agent-state.sh
 
 # カーソル速度
 defaults write -g KeyRepeat -int 1

@@ -98,29 +98,11 @@
       "Edit(~/.ssh/*_ed25519)",
       "Edit(/etc/passwd)",
       "Edit(/etc/shadow)",
-      "Edit(/etc/sudoers)",
-      "Write(/etc/**)",
-      "Write(/usr/**)",
-      "Write(/var/**)",
-      "Write(/opt/**)",
-      "Write(/bin/**)",
-      "Write(/sbin/**)",
-      "Write(/lib/**)",
-      "Write(/lib64/**)",
-      "Write(/boot/**)",
-      "Write(/proc/**)",
-      "Write(/sys/**)",
-      "Write(/dev/**)",
-      "Write(~/.ssh/id_*)",
-      "Write(~/.ssh/*_rsa)",
-      "Write(~/.ssh/*_ecdsa)",
-      "Write(~/.ssh/*_ed25519)",
-      "Write(/etc/passwd)",
-      "Write(/etc/shadow)",
-      "Write(/etc/sudoers)"
+      "Edit(/etc/sudoers)"
     ],
-    "defaultMode": "acceptEdits"
+    "defaultMode": "auto"
   },
+  "model": "opus",
   "hooks": {
     "SessionStart": [
       {
@@ -128,7 +110,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash '~/.claude/hooks/herdr-agent-state.sh' session",
+            "command": "bash \"$HOME/.claude/hooks/herdr-agent-state.sh\" session",
             "timeout": 10
           }
         ]
@@ -140,10 +122,10 @@
     "command": "bun run ~/.claude/scripts/statusline.ts"
   },
   "enabledPlugins": {
-    "claude-code-setup@claude-plugins-official": true,
-    "claude-md-management@claude-plugins-official": true,
-    "code-review@claude-plugins-official": true,
-    "context7@claude-plugins-official": true
+    "claude-code-setup@claude-plugins-official": false,
+    "claude-md-management@claude-plugins-official": false,
+    "code-review@claude-plugins-official": false,
+    "context7@claude-plugins-official": false
   },
   "extraKnownMarketplaces": {
     "last30days-skill": {
@@ -154,6 +136,5 @@
     }
   },
   "language": "japanese",
-  "tui": "fullscreen",
-  "model": "opus"
+  "tui": "fullscreen"
 }
